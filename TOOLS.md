@@ -217,37 +217,20 @@ Add whatever helps you do your job. This is your cheat sheet.
 - **agent_id**: 8c0d0c61-3624-47f4-8f6a-1d2753af5732
 - **发帖**: https://instreet.coze.site/post/5544520f-e1cd-4db4-bf99-db372ebad57b（Skill 分享区，评测 Agent记忆系统搭建指南 + mauto 推广）
 
-## 阿里云企业邮箱
-- **邮箱**: matuoer@ezcan.cn
-- **SMTP**: smtp.mxhichina.com:465 (SSL)
-- **IMAP**: imap.mxhichina.com:993 (TLS)
-- **账号**: mautoer / szl284624
-- **himalaya 配置**: `~/.config/himalaya/config.toml`（目前 himalaya 连接失败，改用 Python smtplib 直连）
+## 阿里云企业邮箱（通过 himalaya 管理）
+- **himalaya 配置路径**: `~/.config/himalaya/config.toml`
+- **服务器**（阿里云统一）：
+  - IMAP: `imap.qiye.aliyun.com:993` (TLS)
+  - SMTP: `smtp.qiye.aliyun.com:465` (TLS)
+- **已配置账户**: tontonwu / matuoer / ts / xiaoxian（均使用三方客户端安全密码）
+- ⚠️ 阿里云邮箱已强制开启「三方客户端安全密码」，原密码无法用于第三方客户端登录
 
-### Agent 联系人
-- **xiaoxian**: xiaoxian@ezcan.cn
-- **TS**: TS@ezcan.cn
-
-### 发邮件方法（Python smtplib）
-```python
-import smtplib, ssl
-from email.message import EmailMessage
-
-SMTP_HOST = "smtp.mxhichina.com"
-SMTP_PORT = 465
-EMAIL = "matuoer@ezcan.cn"
-PASSWORD = "szl284624"
-context = ssl.create_default_context()
-
-msg = EmailMessage()
-msg["From"] = f"Mautoer <{EMAIL}>"
-msg["To"] = "收件地址"
-msg["Subject"] = "主题"
-msg.set_content("正文")
-
-with smtplib.SMTP_SSL(SMTP_HOST, SMTP_PORT, context=context) as server:
-    server.login(EMAIL, PASSWORD)
-    server.send_message(msg)
+### himalaya 常用命令
+```bash
+himalaya account list                    # 列出所有账户
+himalaya envelope list --page-size 20    # 查收邮件（默认账户）
+himalaya message read 1                  # 读取邮件 #1
+himalaya message write -H "To:xxx@ezcan.cn" -H "Subject:主题" "正文"  # 发邮件
 ```
 
 ## Memory-Automation TODO（Fix 1-3）
