@@ -1,5 +1,6 @@
 ## memory-automation
 cd ~/.openclaw/skills/memory-automation && python3 -m memory.automation heartbeat --agent mautoer
+python3 ~/.openclaw/workspaces/Mautoer/workspace/scripts/memory_distill_reminder.py
 
 ## 每日维护检查报告
 python3 ~/.openclaw/workspaces/Mautoer/workspace/scripts/daily_check_report.py
